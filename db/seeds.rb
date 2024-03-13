@@ -15,20 +15,20 @@
 # end
 
 # Using API import PlayerClass Data
-require 'faraday'
-require 'faraday_middleware'
-require 'json'
+# require 'faraday'
+# require 'faraday_middleware'
+# require 'json'
 
-# Use access_token to set up Faraday connection
-def setup_api_client(access_token)
-  Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
-    faraday.response :json
-    faraday.adapter Faraday.default_adapter
-    faraday.params['access_token'] = access_token
-    faraday.params['namespace'] = 'static-10.2.5_52554-us'
-    faraday.params['locale'] = 'en_US'
-  end
-end
+# # Use access_token to set up Faraday connection
+# def setup_api_client(access_token)
+#   Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
+#     faraday.response :json
+#     faraday.adapter Faraday.default_adapter
+#     faraday.params['access_token'] = access_token
+#     faraday.params['namespace'] = 'static-10.2.5_52554-us'
+#     faraday.params['locale'] = 'en_US'
+#   end
+# end
 
 # Create a player_class data import function
 # def import_classes(api_client)
@@ -87,38 +87,39 @@ end
 # end
 
 # Create a race_class date import function
-def import_race_classes(api_client)
-  Race.find_each do |race|
-    # Get detailed information for each race from the API
-    response = api_client.get("/data/wow/playable-race/#{race.id}")
+# def import_race_classes(api_client)
+#   Race.find_each do |race|
+#     # Get detailed information for each race from the API
+#     response = api_client.get("/data/wow/playable-race/#{race.id}")
 
-    if response.success?
-      race_detail = response.body
+#     if response.success?
+#       race_detail = response.body
 
-      # Traverse each class available for this race
-      race_detail['playable_classes'].each do |playable_class|
-        class_detail_response = api_client.get(playable_class['key']['href'])
+#       # Traverse each class available for this race
+#       race_detail['playable_classes'].each do |playable_class|
+#         class_detail_response = api_client.get(playable_class['key']['href'])
 
-        if class_detail_response.success?
-          class_detail = class_detail_response.body
-          player_class_id = class_detail['id']
+#         if class_detail_response.success?
+#           class_detail = class_detail_response.body
+#           player_class_id = class_detail['id']
 
-          # Make sure the class exists in the database
-          if PlayerClass.exists?(id: player_class_id)
-            # Making connections between race and class
-            RaceClass.find_or_create_by(race_id: race.id, player_class_id: player_class_id)
-          end
-        end
-      end
-    else
-      puts "Failed to fetch race details for race ID #{race.id}: #{response.status}"
-    end
-  end
-end
+#           # Make sure the class exists in the database
+#           if PlayerClass.exists?(id: player_class_id)
+#             # Making connections between race and class
+#             RaceClass.find_or_create_by(race_id: race.id, player_class_id: player_class_id)
+#           end
+#         end
+#       end
+#     else
+#       puts "Failed to fetch race details for race ID #{race.id}: #{response.status}"
+#     end
+#   end
+# end
 
-access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
+# access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
 
-api_client = setup_api_client(access_token)
-# import_classes(api_client)
-# import_specialization(api_client)
-import_race_classes(api_client)
+# api_client = setup_api_client(access_token)
+# # import_classes(api_client)
+# # import_specialization(api_client)
+# import_race_classes(api_client)
+

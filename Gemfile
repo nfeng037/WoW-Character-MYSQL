@@ -6,6 +6,8 @@ gem "faraday", "1.10.3"
 
 gem "faraday_middleware", "1.2.0"
 
+gem 'faker', "3.2.3"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
