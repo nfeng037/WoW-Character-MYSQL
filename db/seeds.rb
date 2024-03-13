@@ -1,9 +1,15 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Using CSV Files import Race data
+require 'csv'
+
+csv_text = File.read("/Users/angelina/Documents/Agile/DataProject/race.csv")
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+
+csv.each do |race|
+  Race.create(
+    id: race['ID'],
+    name: race['Name'],
+    description: race['Description'],
+    faction: race['Faction'],
+    media_url: race['Media_URL']
+  )
+end
