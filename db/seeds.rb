@@ -39,7 +39,7 @@ end
 #     # Parse the class list
 #     classes = response.body['classes']
 
-#     # Traverse the class list and initiate a detailed information request for each race
+#     # Traverse the class list and initiate a detailed information request for each class
 #     classes.each do |class_summary|
 #       class_detail_response = api_client.get(class_summary['key']['href'])
 #       if class_detail_response.success?
@@ -59,29 +59,59 @@ end
 # end
 
 # Create a specialization data import function
-def import_specialization(api_client)
-  # Initiate a request to get all specialization
-  response = api_client.get('/data/wow/playable-specialization/index')
+# def import_specialization(api_client)
+#   # Initiate a request to get all specialization
+#   response = api_client.get('/data/wow/playable-specialization/index')
 
-  if response.success?
-    # Parse the specialization list
-    specializations = response.body["character_specializations"]
+#   if response.success?
+#     # Parse the specialization list
+#     specializations = response.body["character_specializations"]
 
-    # Traverse the specialization list and initiate a detailed information request for each one
-    specializations.each do |specialization|
-      specialization_detail_response = api_client.get(specialization['key']['href'])
-      if specialization_detail_response.success?
-        specialization_detail = specialization_detail_response.body
+#     # Traverse the specialization list and initiate a detailed information request for each one
+#     specializations.each do |specialization|
+#       specialization_detail_response = api_client.get(specialization['key']['href'])
+#       if specialization_detail_response.success?
+#         specialization_detail = specialization_detail_response.body
 
-        # Create specialization records into the database
-        Specialization.create(
-          id: specialization_detail['id'],
-          name: specialization_detail['name'],
-          description: specialization_detail['gender_description']['male'],
-          role: specialization_detail['role']['name'],
-          player_class_id: specialization_detail['playable_class']['id']
-        )
+#         # Create specialization records into the database
+#         Specialization.create(
+#           id: specialization_detail['id'],
+#           name: specialization_detail['name'],
+#           description: specialization_detail['gender_description']['male'],
+#           role: specialization_detail['role']['name'],
+#           player_class_id: specialization_detail['playable_class']['id']
+#         )
+#       end
+#     end
+#   end
+# end
+
+# Create a race_class date import function
+def import_race_classes(api_client)
+  Race.find_each do |race|
+    # Get detailed information for each race from the API
+    response = api_client.get("/data/wow/playable-race/#{race.id}")
+
+    if response.success?
+      race_detail = response.body
+
+      # Traverse each class available for this race
+      race_detail['playable_classes'].each do |playable_class|
+        class_detail_response = api_client.get(playable_class['key']['href'])
+
+        if class_detail_response.success?
+          class_detail = class_detail_response.body
+          player_class_id = class_detail['id']
+
+          # Make sure the class exists in the database
+          if PlayerClass.exists?(id: player_class_id)
+            # Making connections between race and class
+            RaceClass.find_or_create_by(race_id: race.id, player_class_id: player_class_id)
+          end
+        end
       end
+    else
+      puts "Failed to fetch race details for race ID #{race.id}: #{response.status}"
     end
   end
 end
@@ -90,4 +120,5 @@ access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
 
 api_client = setup_api_client(access_token)
 # import_classes(api_client)
-import_specialization(api_client)
+# import_specialization(api_client)
+import_race_classes(api_client)
