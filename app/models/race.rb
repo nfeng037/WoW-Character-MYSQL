@@ -5,4 +5,6 @@ class Race < ApplicationRecord
   has_many :race_classes
   has_many :classes, through: :race_classes
 
+  validates :name, :faction, :id, presence: true
+  validates :description, presence: true, length: { minimum: 10 }
 end
