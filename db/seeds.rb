@@ -15,20 +15,20 @@
 # end
 
 # Using API import PlayerClass Data
-# require 'faraday'
-# require 'faraday_middleware'
-# require 'json'
+require 'faraday'
+require 'faraday_middleware'
+require 'json'
 
-# # Use access_token to set up Faraday connection
-# def setup_api_client(access_token)
-#   Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
-#     faraday.response :json
-#     faraday.adapter Faraday.default_adapter
-#     faraday.params['access_token'] = access_token
-#     faraday.params['namespace'] = 'static-10.2.5_52554-us'
-#     faraday.params['locale'] = 'en_US'
-#   end
-# end
+# Use access_token to set up Faraday connection
+def setup_api_client(access_token)
+  Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
+    faraday.response :json
+    faraday.adapter Faraday.default_adapter
+    faraday.params['access_token'] = access_token
+    faraday.params['namespace'] = 'static-10.2.5_52554-us'
+    faraday.params['locale'] = 'en_US'
+  end
+end
 
 # Create a player_class data import function
 # def import_classes(api_client)
@@ -116,10 +116,44 @@
 #   end
 # end
 
-# access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
+access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
 
-# api_client = setup_api_client(access_token)
+api_client = setup_api_client(access_token)
 # # import_classes(api_client)
 # # import_specialization(api_client)
 # import_race_classes(api_client)
 
+# Using Faker generate Hero data
+# require 'faker'
+
+# 100.times do
+#   Hero.create(
+#     name: Faker::Games::WorldOfWarcraft.hero,
+#     race_id: Race.order('RANDOM()').first.id,
+#     player_class_id: PlayerClass.order('RANDOM()').first.id,
+#     quote: Faker::Games::WorldOfWarcraft.quote
+#   )
+# end
+
+# Using API insert media_url into PlayerClass
+PlayerClass.find_each do |player_class|
+  response = api_client.get('/data/wow/playable-class/index')
+
+  if response.success?
+    # Parse the class list
+    classes = response.body['classes']
+    # Traverse the class list and initiate a detailed information request for each class
+    classes.each do |class_summary|
+      class_detail_response = api_client.get(class_summary['key']['href'])
+      if class_detail_response.success?
+        class_detail = class_detail_response.body['media']
+        media_response = api_client.get(class_detail['key']['href'])
+        if media_response.success?
+          media_detail = media_response.body
+          player_class.update(media_url: media_detail['assets'][0]['value'])
+        end
+      end
+    end
+
+  end
+end
