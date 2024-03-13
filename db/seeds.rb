@@ -31,34 +31,63 @@ def setup_api_client(access_token)
 end
 
 # Create a player_class data import function
-def import_classes(api_client)
-  # Initiate a request to get all classes
-  response = api_client.get('/data/wow/playable-class/index')
+# def import_classes(api_client)
+#   # Initiate a request to get all classes
+#   response = api_client.get('/data/wow/playable-class/index')
+
+#   if response.success?
+#     # Parse the class list
+#     classes = response.body['classes']
+
+#     # Traverse the class list and initiate a detailed information request for each race
+#     classes.each do |class_summary|
+#       class_detail_response = api_client.get(class_summary['key']['href'])
+#       if class_detail_response.success?
+#         class_detail = class_detail_response.body
+
+#         # Create class records into the database
+#         PlayerClass.create(
+#           id: class_detail['id'],
+#           name: class_detail['name'],
+#           power_type: class_detail['power_type']['name']
+#         )
+#       end
+#     end
+#   else
+#     puts "Failed to fetch classes: #{response.status}"
+#   end
+# end
+
+# Create a specialization data import function
+def import_specialization(api_client)
+  # Initiate a request to get all specialization
+  response = api_client.get('/data/wow/playable-specialization/index')
 
   if response.success?
-    # Parse the class list
-    classes = response.body['classes']
+    # Parse the specialization list
+    specializations = response.body["character_specializations"]
 
-    # Traverse the class list and initiate a detailed information request for each race
-    classes.each do |class_summary|
-      class_detail_response = api_client.get(class_summary['key']['href'])
-      if class_detail_response.success?
-        class_detail = class_detail_response.body
+    # Traverse the specialization list and initiate a detailed information request for each one
+    specializations.each do |specialization|
+      specialization_detail_response = api_client.get(specialization['key']['href'])
+      if specialization_detail_response.success?
+        specialization_detail = specialization_detail_response.body
 
-        # Create class records into the database
-        PlayerClass.create(
-          id: class_detail['id'],
-          name: class_detail['name'],
-          power_type: class_detail['power_type']['name']
+        # Create specialization records into the database
+        Specialization.create(
+          id: specialization_detail['id'],
+          name: specialization_detail['name'],
+          description: specialization_detail['gender_description']['male'],
+          role: specialization_detail['role']['name'],
+          player_class_id: specialization_detail['playable_class']['id']
         )
       end
     end
-  else
-    puts "Failed to fetch classes: #{response.status}"
   end
 end
 
 access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
 
 api_client = setup_api_client(access_token)
-import_classes(api_client)
+# import_classes(api_client)
+import_specialization(api_client)
