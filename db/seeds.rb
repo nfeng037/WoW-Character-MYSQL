@@ -116,7 +116,7 @@ end
 #   end
 # end
 
-access_token = 'USOwYDe2DbCEC8BHq9BcMxUIAxmDZvmmNi'
+access_token = 'USEOhFEXogYznD3Oqp4uoD543PRIHKHVYd'
 
 api_client = setup_api_client(access_token)
 # # import_classes(api_client)
@@ -137,23 +137,13 @@ api_client = setup_api_client(access_token)
 
 # Using API insert media_url into PlayerClass
 PlayerClass.find_each do |player_class|
-  response = api_client.get('/data/wow/playable-class/index')
+  response = api_client.get("/data/wow/media/playable-class/#{player_class.id}")
 
   if response.success?
-    # Parse the class list
-    classes = response.body['classes']
-    # Traverse the class list and initiate a detailed information request for each class
-    classes.each do |class_summary|
-      class_detail_response = api_client.get(class_summary['key']['href'])
-      if class_detail_response.success?
-        class_detail = class_detail_response.body['media']
-        media_response = api_client.get(class_detail['key']['href'])
-        if media_response.success?
-          media_detail = media_response.body
-          player_class.update(media_url: media_detail['assets'][0]['value'])
-        end
-      end
-    end
-
+    media_detail = response.body
+    media_url = media_detail['assets'][0]['value'] if media_detail['assets'].present?
+    player_class.update(media_url: media_url) if media_url
+  else
+    puts "Failed to fetch media for class ID #{player_class.id}: #{response.status}"
   end
 end

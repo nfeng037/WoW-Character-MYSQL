@@ -1,0 +1,60 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <figure class="lg:flex rounded-xl p-8 lg:p-0 ">
+    <img class="lg:w-68 lg:h-auto lg:rounded-none rounded-full mx-auto" src="<%= @race.media_url %>" alt="<%= @race.name %>" width="384" height="512">
+    <div class="pt-6 lg:p-8 text-center lg:text-left space-y-4">
+      <blockquote>
+        <h1 class="text-3xl font-bold p-5 text-center"><%= @race.name %></h1>
+        <p>
+          <b>ID: </b> <%= @race.id %>
+        </p>
+        <div class="flex">
+          <p class="font-bold"> Faction: </p>
+          <p class="text-purple-500 hover:text-purple-800 underline px-2 hover:scale-110">
+            <%= link_to @race.faction, races_by_faction_path(faction: @race.faction) %>
+          </p>
+        </div>
+        <% if @race.faction == 'Horde' %>
+          <p class="text-red-500">This race is a proud member of the Horde, warriors by nature.</p>
+        <% elsif @race.faction == 'Alliance' %>
+          <p class="text-blue-500">This race belongs to the Alliance, champions of justice and freedom.</p>
+        <% else %>
+          <p>This race stands on its own, unaffiliated with the major factions.</p>
+        <% end %>
+        <p class="text-lg font-medium">
+          <%= @race.description %>
+        </p>
+      </blockquote>
+      <figcaption class="font-medium">
+        <div>
+          <h2 class="text-purple-500 my-2">
+            Available Class
+          </h2>
+          <ul class="flex gap-4">
+            <% @race.player_classes.each do |player_class| %>
+              <li>
+                <a
+                  href="/player_class/<%= player_class.id %>"
+                  target="_blank"
+                  title="<%= player_class.name %>"
+                >
+                  <img
+                    alt="<%= player_class.name %>"
+                    src="<%= player_class.media_url %>"
+                    class="transform transition duration-500 hover:scale-150"
+                  >
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </figcaption>
+    </div>
+  </figure>
+</div>
+<!-- Footer -->
+<%= render 'layouts/footer' %>

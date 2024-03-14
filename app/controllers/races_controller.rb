@@ -9,4 +9,9 @@ class RacesController < ApplicationController
 
   def about
   end
+
+  def faction
+    @faction = params[:faction]
+    @races = Race.where(faction: @faction.capitalize)
+  end
 end
