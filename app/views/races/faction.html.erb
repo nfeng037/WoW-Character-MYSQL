@@ -4,48 +4,41 @@
 <!-- Hero Section -->
 <div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
   <h1 class="text-3xl font-bold p-5 text-center"><%= @faction %> Races</h1>
-  <div>
-      <table class="min-w-full bg-white overflow-hidden">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
-              Race ID
-            </th>
-            <th class="w-2/4 px-6 py-3 text-left uppercase tracking-wider">
-              Race Name
-            </th>
-            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
-              Image
-            </th>
-          </tr>
-        </thead>
+  <div class="overflow-x-auto mt-6">
+    <table class="min-w-full leading-normal">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            Race ID
+          </th>
+          <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            Race Name
+          </th>
+          <th class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            Image
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700">
         <% @races.each do |race| %>
-        <tbody class="text-gray-700">
-          <tr>
-            <td class="px-6 py-4 border-b border-gray-200">
-              <%= race.id %>
-            </td>
-            <td class="px-6 py-4 border-b border-gray-200">
-              <a
-                href="/races/<%= race.id %>"
-                target="_blank"
-                class="text-indigo-500 hover:text-indigo-800 hover:underline"
-              >
-                <%= race.name %>
-              </a>
-            </td>
-            <td class="px-6 py-4 border-b border-gray-200">
-            <a
-              href="/races/<%= race.id %>"
-              target="_blank"
-            >
-              <img class="w-10 transform transition duration-500 hover:scale-150" alt="<%= race.name %>" src="<%= race.media_url %>">
+        <tr>
+          <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
+            <%= race.id %>
+          </td>
+          <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
+            <a href="/races/<%= race.id %>" class="text-indigo-600 hover:text-indigo-900">
+              <%= race.name %>
             </a>
-            </td>
-          </tr>
-        </tbody>
+          </td>
+          <td class="px-5 py-4 border-b border-gray-200 bg-white text-sm">
+            <a href="/races/<%= race.id %>">
+              <img class="w-10 h-10 rounded-full mx-auto hover:scale-125 transition-transform duration-300" alt="<%= race.name %>" src="<%= race.media_url %>">
+            </a>
+          </td>
+        </tr>
         <% end %>
-      </table>
+      </tbody>
+    </table>
   </div>
 </div>
 

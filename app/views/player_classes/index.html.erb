@@ -1,0 +1,56 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <h1 class="text-3xl font-bold p-5 text-center">Classes</h1>
+  <%= paginate @player_classes %>
+  <div class="overflow-x-auto mt-6">
+    <table class="table-auto w-full">
+      <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+        <tr>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">ID</div>
+          </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Name</div>
+          </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Power Type</div>
+          </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Image</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-sm divide-y divide-gray-100">
+        <% @player_classes.each do |player_class| %>
+          <tr>
+            <td class="p-2 whitespace-nowrap">
+              <div class="text-left"><%= player_class.id %></div>
+            </td>
+            <td class="p-2 whitespace-nowrap ">
+              <a href="/player_class/<%= player_class.id %>" class="text-indigo-600 hover:text-indigo-900 hover:underline">
+                <div class="text-left"><%= player_class.name %></div>
+              </a>
+            </td>
+            <td class="p-2 whitespace-nowrap">
+              <div class="text-left"><%= player_class.power_type %></div>
+            </td>
+            <td class="p-2 whitespace-nowrap">
+              <div class="flex items-center">
+                <a href="/player_class/<%= player_class.id %>">
+                  <img src="<%= player_class.media_url %>" alt="<%= player_class.name %>" class="w-10 h-10 rounded-full mx-auto hover:scale-125 transition-transform duration-300">
+                </a>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= paginate @player_classes %>
+</div>
+
+<!-- Footer -->
+<%= render 'layouts/footer' %>

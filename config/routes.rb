@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   get"races/:id", to: "races#show"
   get"about", to: "races#about"
   get 'races/faction/:faction', to: 'races#faction', as: 'races_by_faction'
+
+  get"player_class", to: "player_classes#index"
+  get"player_class/:id", to: "player_classes#show"
 end

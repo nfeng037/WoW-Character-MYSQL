@@ -1,6 +1,6 @@
 class RacesController < ApplicationController
   def index
-    @races = Race.all
+    @races = Race.page(params[:page]).per(8)
   end
 
   def show

@@ -5,21 +5,20 @@
 <!-- Hero Section -->
 <div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
   <h1 class="text-3xl font-bold p-5 text-center">Races</h1>
+  <%= paginate @races %>
   <div class="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-10 p-3">
     <% @races.each do |race| %>
       <div
         class="bg-grey-100 flex flex-col space-y-3 justify-between rounded shadow transform transition duration-500 hover:scale-110 bg-gradient-to-t from-[#f0f9ff] to-[#312e81]  text-white"
       >
-        <a
-          href="/races/<%= race.id %>"
-          target="_blank"
-        >
+        <a href="/races/<%= race.id %>">
           <h2 class="text-xl mx-auto font-bold mb-3 p-3"><%= race.name %></h2>
           <img alt="<%= race.name %>" src="<%= race.media_url %>">
         </a>
       </div>
     <% end %>
   </div>
+  <%= paginate @races %>
 </div>
 
 <!-- Footer -->
