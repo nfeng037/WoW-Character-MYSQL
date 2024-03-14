@@ -1,13 +1,13 @@
 <header class="bg-white h-[10%]">
-  <nav class="flex justify-between items-center custom:w-[92%] mx-auto">
-    <div class="mx-5">
+  <nav class="flex justify-between items-center lg:w-[80%] mx-auto">
+    <div>
       <a href="/races">
         <img class="w-28" src="https://efd6aed1.flyingcdn.com/wp-content/uploads/2023/08/World-of-Warcraft-logo-768x432.png">
       </a>
     </div>
-    <div class="nav-links duration-500 custom:static absolute bg-white custom:min-h-fit min-h-[500] left-0 top-[-100%] custom:w-auto w-full flex items-center px-5">
-      <div class="flex custom:flex-row flex-col custom:items-center  custom:gap-[10vw] gap-4">
-        <ul class="flex custom:flex-row flex-col custom:items-center custom:gap-[2vw] gap-4">
+    <div class="nav-links duration-500 lg:static absolute bg-white lg:min-h-fit min-h-[600] left-0 top-[-100%] lg:w-auto w-full flex items-center">
+      <div class="flex lg:flex-row flex-col lg:items-center  lg:gap-[8vw] gap-4">
+        <ul class="flex lg:flex-row flex-col lg:items-center lg:gap-[2vw] gap-4">
           <li>
             <a class="hover:text-gray-500" href="/races">Race</a>
           </li>
@@ -21,10 +21,10 @@
             <a class="hover:text-gray-500" href="#">Hero</a>
           </li>
           <li>
-            <a class="hover:text-gray-500" href="#">About</a>
+            <a class="hover:text-gray-500" href="/about">About</a>
           </li>
         </ul>
-        <div class="flex custom:flex-row flex-col custom:items-center gap-1">
+        <div class="flex h-10 lg:flex-row flex-col gap-1 ">
           <input type="search" class="w-25 rounded-full">
           <select class="rounded-full">
             <option value="">All</option>
@@ -33,11 +33,11 @@
             <option value="">Hero</option>
             <option value="">Specialization</option>
           </select>
-          <button class="bg-[#a6c1ee] text-white px-3 py-2 m-2 rounded-full hover:bg-[#87acec]">Search</button>
+          <button class="bg-[#a6c1ee] text-white px-3 py-2 rounded-full hover:bg-[#87acec]">Search</button>
         </div>
       </div>
     </div>
-    <ion-icon name="menu" onclick="onToggleMenu(this)" class="text-3xl cursor-pointer mx-5 custom:hidden"></ion-icon>
+    <ion-icon name="menu" onclick="onToggleMenu(this)" class="text-3xl cursor-pointer mx-5 lg:hidden"></ion-icon>
   </nav>
 </header>
 

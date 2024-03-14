@@ -1,0 +1,320 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <h1 class="text-3xl font-bold text-center">About the Project</h1>
+  <p class="text-gray-700 text-lg p-4">
+    This project utilizes data from various sources, including the World of
+    Warcraft Game Data API, the official World of Warcraft website, and the
+    Faker library, to provide insights into the World of Warcraft game dynamics.
+    With a focus on collecting and presenting data related to game races,
+    classes, specializations, and heroes, our aim is to offer players a
+    comprehensive resource for understanding the intricate details of their
+    favorite game characters and abilities, aiding in strategy development and
+    enhancing their gameplay experience.
+  </p>
+
+  <!-- Data Source -->
+  <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
+    <!-- API Data Source -->
+    <div
+      class="flex flex-col space-y-4 justify-between bg-white rounded shadow p-6 hover:shadow-md duration-300 ease-in-out"
+    >
+      <h2 class="text-2xl font-bold mb-3">Game Data API</h2>
+      <p class="text-gray-600 flex-1">
+        Provides game data including races, classes, and specializations. The API returns JSON objects with fields like `name` and `id`, and nested objects for complex attributes.
+      </p>
+      <a
+        href="https://develop.battle.net/documentation/world-of-warcraft-classic/game-data-apis"
+        target="_blank"
+        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+        >API Documentation</a
+      >
+    </div>
+
+    <!-- Official Website Data Source -->
+    <div
+      class="flex flex-col space-y-4 justify-between bg-white rounded shadow p-6 hover:shadow-md duration-300 ease-in-out"
+    >
+      <h2 class="text-2xl font-bold mb-3">Official Website</h2>
+      <p class="text-gray-600 flex-1">
+        Data including race images and descriptions are extracted from the official website and structured into a CSV file with columns for `id`, `name`, `faction`, `description`, and `media_url`.
+      </p>
+      <a
+        href="https://worldofwarcraft.blizzard.com/en-us/game/races"
+        target="_blank"
+        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 mt-auto"
+        >Official Website</a
+      >
+    </div>
+
+    <!-- Faker Library Data Source -->
+    <div
+      class="flex flex-col space-y-4 justify-between bg-white rounded shadow p-6 hover:shadow-md duration-300 ease-in-out"
+    >
+      <h2 class="text-2xl font-bold mb-3">Faker Library</h2>
+      <p class="text-gray-600 flex-1">
+        Generates fake character names and quotes for placeholder data in development. Used for populating the `Heroes` table with dummy data.
+      </p>
+      <a
+        href="https://github.com/faker-ruby/faker/blob/main/doc/games/world_of_warcraft.md"
+        target="_blank"
+        class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+        >Faker GitHub</a
+      >
+    </div>
+  </div>
+
+  <!-- Integration Plan Section -->
+  <div class="container mx-auto px-8 py-8">
+    <h2 class="text-2xl font-semibold mb-4">Data Integration Plan</h2>
+    <p>This project integrates data from several sources to create a comprehensive view of the World of Warcraft universe:</p>
+
+    <ul class="list-disc pl-5 mb-4">
+      <li>
+        <strong>Game Data API</strong> provides the core structure for races, classes, and specializations.
+        This forms the foundation of our database where all other data references.
+      </li>
+      <li>
+        <strong>Official Website</strong> enriches the basic data with detailed descriptions and media,
+        linked by race ID. Images and texts are used to add a visual dimension to the API data.
+      </li>
+      <li>
+        <strong>Faker Library</strong> is used to simulate user-generated content, such as hero profiles and quotes,
+        to demonstrate how user input might interact with the core data structure.
+      </li>
+    </ul>
+    <p>
+      Each race and class from the API is mapped to its corresponding image and description from the website.
+      Specializations are tied to classes and extended with roles and additional attributes.
+      The heroes are dynamically generated to showcase a variety of race and class combinations, with placeholder data
+      demonstrating potential real-world character descriptions and commentary.
+    </p>
+  </div>
+
+  <!-- Database Tables Structure -->
+  <div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+    <h2 class="text-2xl font-semibold mb-4">Database Tables and Columns</h2>
+    <!-- Database Table Structures -->
+    <!-- Races Table-->
+    <div class="overflow-x-auto mt-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Races Table</h3>
+      <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gray-700 text-white">
+          <tr>
+            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
+              Column Name
+            </th>
+            <th class="w-3/4 px-6 py-3 text-left uppercase tracking-wider">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The primary key of the races table.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">name</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The name of the race.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">faction</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The faction of the race (Alliance or Horde).
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">description</td>
+            <td class="px-6 py-4">A brief description of the race.</td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">media_url</td>
+            <td class="px-6 py-4">The URL of the race media image.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PlayerClasses Table-->
+    <div class="overflow-x-auto mt-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">PlayerClasses Table</h3>
+      <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gray-700 text-white">
+          <tr>
+            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
+              Column Name
+            </th>
+            <th class="w-3/4 px-6 py-3 text-left uppercase tracking-wider">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The primary key of the player_class table.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">name</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The name of the class.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">power_type</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The type of power the class uses (e.g., mana, rage).
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">media_url</td>
+            <td class="px-6 py-4">
+              A URL to an associated media item, like an image, for the class.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Heroes Table-->
+    <div class="overflow-x-auto mt-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Heroes Table</h3>
+      <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gray-700 text-white">
+          <tr>
+            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
+              Column Name
+            </th>
+            <th class="w-3/4 px-6 py-3 text-left uppercase tracking-wider">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The unique identifier for the hero.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">player_class_id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The identifier that links the hero to a class.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">race_id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The identifier that links the hero to a race.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">name</td>
+            <td class="px-6 py-4">
+              The hero's name.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">quote</td>
+            <td class="px-6 py-4">
+              A quote associated with the hero.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Specialization Table-->
+    <div class="overflow-x-auto mt-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">Specialization Table</h3>
+      <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gray-700 text-white">
+          <tr>
+            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
+              Column Name
+            </th>
+            <th class="w-3/4 px-6 py-3 text-left uppercase tracking-wider">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The unique identifier for the specialization.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">player_class_id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The identifier linking the specialization to its corresponding class.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">name</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              The name of the specialization.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">description</td>
+            <td class="px-6 py-4">
+              A detailed description of the specialization.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4">role</td>
+            <td class="px-6 py-4">
+              The role that the specialization plays in the game (e.g., healer, tank, damage dealer).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- RaceClass Table-->
+    <div class="overflow-x-auto mt-6">
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">RaceClass Table</h3>
+      <table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+        <thead class="bg-gray-700 text-white">
+          <tr>
+            <th class="w-1/4 px-6 py-3 text-left uppercase tracking-wider">
+              Column Name
+            </th>
+            <th class="w-3/4 px-6 py-3 text-left uppercase tracking-wider">
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">race_id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              A foreign key to the race table, indicating which race is associated with the class.
+            </td>
+          </tr>
+          <tr>
+            <td class="px-6 py-4 border-b border-gray-200">player_class_id</td>
+            <td class="px-6 py-4 border-b border-gray-200">
+              A foreign key to the player class table, indicating which class is associated with the race.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<%= render 'layouts/footer' %>
