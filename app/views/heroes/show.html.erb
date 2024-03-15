@@ -1,0 +1,57 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <figure class="lg:flex rounded-xl p-8 lg:p-0 ">
+    <img class="lg:w-68 lg:h-auto lg:rounded-none rounded-full mx-auto" src="<%= @hero.race.media_url %>" alt="<%= @hero.race.name %>" width="384" height="512">
+    <div class="pt-6 lg:p-8 space-y-4">
+      <blockquote>
+        <h1 class="text-3xl font-bold my-5"><%= @hero.name %></h1>
+        <p class="">
+          <b>ID: </b> <%= @hero.id %>
+        </p>
+        <div class="flex">
+          <p class="font-bold lg:text-left"> Faction: </p>
+          <p class="text-purple-500 lg:text-left hover:text-sky-800 underline px-2 hover:scale-110">
+            <%= link_to @hero.race.faction, races_by_faction_path(faction: @hero.race.faction) %>
+          </p>
+        </div>
+        <% if @hero.race.faction == 'Horde' %>
+          <p class="text-red-500">This race is a proud member of the Horde, warriors by nature.</p>
+        <% elsif @hero.race.faction == 'Alliance' %>
+          <p class="text-blue-500">This race belongs to the Alliance, champions of justice and freedom.</p>
+        <% else %>
+          <p>This race stands on its own, unaffiliated with the major factions.</p>
+        <% end %>
+        <p class="text-lg font-medium">
+          <%= @hero.quote %>
+        </p>
+      </blockquote>
+      <figcaption class="font-medium">
+        <div>
+          <h2 class="text-purple-500 my-2">
+            Class: <%= @hero.player_class.name %>
+          </h2>
+          <ul class="flex gap-4">
+              <li>
+                <a
+                  href="/player_class/<%= @hero.player_class.id %>"
+                  title="<%= @hero.player_class.name %>"
+                >
+                  <img
+                    alt="<%= @hero.player_class.name %>"
+                    src="<%= @hero.player_class.media_url %>"
+                    class="transform transition duration-500 hover:scale-150"
+                  >
+                </a>
+              </li>
+          </ul>
+        </div>
+      </figcaption>
+    </div>
+  </figure>
+</div>
+<!-- Footer -->
+<%= render 'layouts/footer' %>

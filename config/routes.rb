@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   get"specialization", to: "specializations#index"
   get"specialization/:id", to: "specializations#show"
+
+  get"hero", to: "heroes#index"
+  get"hero/:id", to: "heroes#show"
 end
