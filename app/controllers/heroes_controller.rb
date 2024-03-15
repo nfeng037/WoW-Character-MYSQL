@@ -1,6 +1,6 @@
 class HeroesController < ApplicationController
   def index
-    @heroes = Hero.page(params[:page]).per(8)
+    @heroes = Hero.paginate(page:params[:page],per_page:8)
   end
 
   def show

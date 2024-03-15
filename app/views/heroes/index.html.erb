@@ -4,7 +4,6 @@
 <!-- Hero Section -->
 <div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
   <h1 class="text-3xl font-bold p-5 text-center">Hero</h1>
-  <%= paginate @heroes %>
   <div class="overflow-x-auto mt-6">
     <table class="table-auto w-full">
       <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
@@ -51,7 +50,7 @@
       </tbody>
     </table>
   </div>
-  <%= paginate @heroes %>
+  <%= will_paginate @heroes %>
 </div>
 
 <!-- Footer -->

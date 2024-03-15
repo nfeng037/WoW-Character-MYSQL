@@ -1,6 +1,6 @@
 class PlayerClassesController < ApplicationController
   def index
-    @player_classes = PlayerClass.page(params[:page]).per(8)
+    @player_classes = PlayerClass.paginate(page:params[:page],per_page:6)
   end
 
   def show

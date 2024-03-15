@@ -1,6 +1,6 @@
 class RacesController < ApplicationController
   def index
-    @races = Race.page(params[:page]).per(8)
+    @races = Race.paginate(page:params[:page],per_page:4)
   end
 
   def show

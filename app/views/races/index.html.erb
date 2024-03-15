@@ -5,7 +5,6 @@
 <!-- Hero Section -->
 <div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
   <h1 class="text-3xl font-bold p-5 text-center">Races</h1>
-  <%= paginate @races %>
   <div class="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-10 p-3">
     <% @races.each do |race| %>
       <div
@@ -20,7 +19,7 @@
       </div>
     <% end %>
   </div>
-  <%= paginate @races %>
+  <%= will_paginate @races %>
 </div>
 
 <!-- Footer -->

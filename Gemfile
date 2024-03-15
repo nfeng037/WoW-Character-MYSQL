@@ -2,8 +2,6 @@ source "https://rubygems.org"
 
 ruby "3.3.0"
 
-gem 'kaminari', '1.2.2'
-
 gem "faraday", "1.10.3"
 
 gem "faraday_middleware", "1.2.0"
@@ -75,3 +73,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.3"
+
+gem "will_paginate", "~> 4.0"
