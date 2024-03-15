@@ -18,6 +18,9 @@
           <th class="p-2 whitespace-nowrap">
             <div class="font-semibold text-left">Role</div>
           </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Class</div>
+          </th>
         </tr>
       </thead>
       <tbody class="text-sm divide-y divide-gray-100">
@@ -33,6 +36,9 @@
             </td>
             <td class="p-2 whitespace-nowrap">
               <div class="text-left"><%= specialization.role %></div>
+            </td>
+            <td class="p-2 whitespace-nowrap">
+              <div class="text-left"><%= specialization.player_class.name %></div>
             </td>
           </tr>
         <% end %>

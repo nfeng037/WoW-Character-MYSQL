@@ -1,0 +1,18 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <% if @results.any? %>
+    <ul>
+      <% @results.each do |result| %>
+        <li><%= result.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No results found.</p>
+  <% end %>
+</div>
+
+<!-- Footer -->
+<%= render 'layouts/footer' %>

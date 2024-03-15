@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/index'
   root'races#index'
 
   get"races", to: "races#index"
@@ -14,4 +15,7 @@ Rails.application.routes.draw do
 
   get"hero", to: "heroes#index"
   get"hero/:id", to: "heroes#show"
+
+  get '/search', to: 'search#index'
+
 end

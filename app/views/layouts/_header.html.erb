@@ -2,7 +2,7 @@
   <nav class="flex justify-between items-center lg:w-[80%] mx-auto">
     <div>
       <a href="/races">
-        <img class="w-28" src="https://efd6aed1.flyingcdn.com/wp-content/uploads/2023/08/World-of-Warcraft-logo-768x432.png">
+        <img class="w-28" alt="logo" src="https://efd6aed1.flyingcdn.com/wp-content/uploads/2023/08/World-of-Warcraft-logo-768x432.png">
       </a>
     </div>
     <div class="nav-links duration-500 lg:static absolute bg-white lg:min-h-fit min-h-[600] left-0 top-[-100%] lg:w-auto w-full flex items-center">
@@ -24,19 +24,17 @@
             <a class="hover:text-gray-500" href="/about">About</a>
           </li>
         </ul>
-        <div class="flex h-10 lg:flex-row flex-col gap-1 ">
-          <input type="search" class="w-25 rounded-full">
-          <select class="rounded-full">
+        <form action="/search" method="get" class="flex h-10 lg:flex-row flex-col gap-1 ">
+          <input name="query" type="search" class="w-25 rounded-full">
+          <select name="category" class="rounded-full">
             <option value="">All</option>
-            <option value="">Race</option>
-            <option value="">Alliance</option>
-            <option value="">Horde</option>
-            <option value="">Class</option>
-            <option value="">Hero</option>
-            <option value="">Specialization</option>
+            <option value="Race">Race</option>
+            <option value="Class">Class</option>
+            <option value="Hero">Hero</option>
+            <option value="Specialization">Specialization</option>
           </select>
-          <button class="bg-[#a6c1ee] text-white px-3 py-2 rounded-full hover:bg-[#87acec]">Search</button>
-        </div>
+          <button type="submit" class="bg-[#a6c1ee] text-white px-3 py-2 rounded-full hover:bg-[#87acec]">Search</button>
+        </form>
       </div>
     </div>
     <ion-icon name="menu" onclick="onToggleMenu(this)" class="text-3xl cursor-pointer mx-5 lg:hidden"></ion-icon>
