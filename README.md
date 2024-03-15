@@ -14,11 +14,6 @@ This Rails application serves as a comprehensive platform for exploring the vast
 
 ## Getting Started
 
-### Prerequisites
-
-- Ruby on Rails 6.0 or higher
-- PostgreSQL
-
 ### Installation
 
 1. Clone the repository:
