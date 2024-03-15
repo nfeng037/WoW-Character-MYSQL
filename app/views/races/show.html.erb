@@ -14,7 +14,7 @@
         </p>
 
           <p class="text-purple-500 hover:text-purple-800 hover:underline">
-            <b>Faction: </b><%= link_to @race.faction, races_by_faction_path(faction: @race.faction) %>
+            <b>Faction: </b><%= link_to @race.faction, by_faction_races_path(faction: @race.faction) %>
           </p>
 
         <% if @race.faction == 'Horde' %>

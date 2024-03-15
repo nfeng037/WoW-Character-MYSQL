@@ -3,32 +3,40 @@ class SearchController < ApplicationController
     @query = params[:query]
     @category = params[:category]
 
-    @results = if @query.present?
-                 case @category
-                 when 'Race'
-                   Race.where("name LIKE ?", "%#{@query}%")
-                 when 'Class'
-                   PlayerClass.where("name LIKE ?", "%#{@query}%")
-                 when 'Specialization'
-                   Specialization.where("name LIKE ?", "%#{@query}%")
-                 when 'Hero'
-                   Hero.where("name LIKE ?", "%#{@query}%")
-                 else
-                   global_search
-                 end
-               else
-                 []
-               end
+    if @query.present?
+      if @category.present?
+        @results = search_by_category(@category.downcase.pluralize, @query)
+      else
+        @results = global_search(@query)
+      end
+    else
+      @results = {}
+    end
   end
 
   private
 
-  def global_search
-    races = Race.where("name LIKE ?", "%#{@query}%")
-    classes = PlayerClass.where("name LIKE ?", "%#{@query}%")
-    specializations = Specialization.where("name LIKE ?", "%#{@query}%")
-    heroes = Hero.where("name LIKE ?", "%#{@query}%")
+  def search_by_category(category, query)
+    case category
+    when 'races'
+      { races: Race.where("name LIKE ?", "%#{query}%") }
+    when 'player_classes'
+      { player_classes: PlayerClass.where("name LIKE ?", "%#{query}%") }
+    when 'specializations'
+      { specializations: Specialization.where("name LIKE ?", "%#{query}%") }
+    when 'heroes'
+      { heroes: Hero.where("name LIKE ?", "%#{query}%") }
+    else
+      {}
+    end
+  end
 
-    races + classes + specializations + heroes
+  def global_search(query)
+    results = {}
+    results[:races] = Race.where("name LIKE ?", "%#{query}%")
+    results[:player_classes] = PlayerClass.where("name LIKE ?", "%#{query}%")
+    results[:specializations] = Specialization.where("name LIKE ?", "%#{query}%")
+    results[:heroes] = Hero.where("name LIKE ?", "%#{query}%")
+    results
   end
 end

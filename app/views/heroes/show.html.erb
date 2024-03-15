@@ -15,7 +15,7 @@
         <div class="flex">
           <p class="font-bold lg:text-left"> Faction: </p>
           <p class="text-purple-500 lg:text-left hover:text-sky-800 underline px-2 hover:scale-110">
-            <%= link_to @hero.race.faction, races_by_faction_path(faction: @hero.race.faction) %>
+            <%= link_to @hero.race.faction, by_faction_races_path(faction: @hero.race.faction) %>
           </p>
         </div>
         <% if @hero.race.faction == 'Horde' %>

@@ -24,17 +24,11 @@
             <a class="hover:text-gray-500" href="/about">About</a>
           </li>
         </ul>
-        <form action="/search" method="get" class="flex h-10 lg:flex-row flex-col gap-1 ">
-          <input name="query" type="search" class="w-25 rounded-full">
-          <select name="category" class="rounded-full">
-            <option value="">All</option>
-            <option value="Race">Race</option>
-            <option value="Class">Class</option>
-            <option value="Hero">Hero</option>
-            <option value="Specialization">Specialization</option>
-          </select>
-          <button type="submit" class="bg-[#a6c1ee] text-white px-3 py-2 rounded-full hover:bg-[#87acec]">Search</button>
-        </form>
+        <%= form_tag search_path, method: :get, class: "flex h-10 lg:flex-row flex-col gap-1" do %>
+          <%= text_field_tag :query, params[:query], class: "w-25 rounded-full" %>
+          <%= select_tag :category, options_for_select([['All', ''], ['Races', 'races'], ['Player Classes', 'player_classes'], ['Heroes', 'heroes'], ['Specializations', 'specializations']], selected: params[:category]), class: "rounded-full" %>
+          <%= submit_tag "Search", class: "bg-[#a6c1ee] text-white px-3 py-2 rounded-full hover:bg-[#87acec]" %>
+        <% end %>
       </div>
     </div>
     <ion-icon name="menu" onclick="onToggleMenu(this)" class="text-3xl cursor-pointer mx-5 lg:hidden"></ion-icon>
