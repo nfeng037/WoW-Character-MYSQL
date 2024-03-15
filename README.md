@@ -23,7 +23,7 @@ This Rails application serves as a comprehensive platform for exploring the vast
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/wow-character-explorer.git
+   git clone https://github.com/nfeng037/WoW-Character-Explorer.git
    ```
 2. Install dependencies:
    ```bash
