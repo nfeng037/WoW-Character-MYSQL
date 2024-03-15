@@ -8,4 +8,7 @@ Rails.application.routes.draw do
 
   get"player_class", to: "player_classes#index"
   get"player_class/:id", to: "player_classes#show"
+
+  get"specialization", to: "specializations#index"
+  get"specialization/:id", to: "specializations#show"
 end

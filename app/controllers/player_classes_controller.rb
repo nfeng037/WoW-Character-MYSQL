@@ -4,6 +4,6 @@ class PlayerClassesController < ApplicationController
   end
 
   def show
-    @player_class = PlayerClass.find(params[:id])
+    @player_class = PlayerClass.includes(:specializations).find(params[:id])
   end
 end

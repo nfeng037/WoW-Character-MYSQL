@@ -1,0 +1,46 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <h1 class="text-3xl font-bold p-5 text-center">Specializations</h1>
+  <%= paginate @specializations %>
+  <div class="overflow-x-auto mt-6">
+    <table class="table-auto w-full">
+      <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
+        <tr>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">ID</div>
+          </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Name</div>
+          </th>
+          <th class="p-2 whitespace-nowrap">
+            <div class="font-semibold text-left">Role</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="text-sm divide-y divide-gray-100">
+        <% @specializations.each do |specialization| %>
+          <tr>
+            <td class="p-2 whitespace-nowrap">
+              <div class="text-left"><%= specialization.id %></div>
+            </td>
+            <td class="p-2 whitespace-nowrap ">
+              <a href="/specialization/<%= specialization.id %>" class="text-indigo-600 hover:text-indigo-900 hover:underline">
+                <div class="text-left"><%= specialization.name %></div>
+              </a>
+            </td>
+            <td class="p-2 whitespace-nowrap">
+              <div class="text-left"><%= specialization.role %></div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= paginate @specializations %>
+</div>
+
+<!-- Footer -->
+<%= render 'layouts/footer' %>

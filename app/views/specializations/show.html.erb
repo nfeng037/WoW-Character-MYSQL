@@ -1,0 +1,35 @@
+<!-- Header -->
+<%= render 'layouts/header' %>
+
+<!-- Hero Section -->
+<div class="container mx-auto my-10 p-10 bg-white rounded shadow-lg">
+  <figure class="lg:flex rounded-xl p-8 lg:p-0 ">
+    <div class="pt-6 lg:p-8 text-center lg:text-left space-y-4">
+      <blockquote>
+        <h1 class="text-3xl font-bold my-5"><%= @specialization.name %></h1>
+        <p class="my-2"><%= @specialization.description %></p>
+        <p class="my-2"><b>ID: </b> <%= @specialization.id %></p>
+        <p><b>Role: </b> <%= @specialization.role %></p>
+      </blockquote>
+      <figcaption class="font-medium">
+        <div>
+          <h2 class="text-purple-500">Belongs to Class:</h2>
+          <a
+            href="/player_class/<%= @specialization.player_class.id %>"
+            title="<%= @specialization.player_class.name %>"
+          >
+            <img
+              src="<%= @specialization.player_class.media_url %>"
+              alt="<%= @specialization.player_class.name %>"
+              class="transform transition duration-500 hover:scale-150 lg:w-10 lg:h-auto rounded-full"
+            >
+            <%=  @specialization.player_class.name %>
+          </a>
+        </div>
+      </figcaption>
+    </div>
+  </figure>
+</div>
+
+<!-- Footer -->
+<%= render 'layouts/footer' %>
