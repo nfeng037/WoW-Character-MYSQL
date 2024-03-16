@@ -1,7 +1,7 @@
 class CreateRaces < ActiveRecord::Migration[7.1]
   def change
     create_table :races, id: false do |t|
-      t.integer :id, primary_key: true, null: false
+      t.bigint :id, primary_key: true, null: false
       t.string :name
       t.string :description
       t.string :faction

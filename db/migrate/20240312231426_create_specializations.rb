@@ -1,7 +1,6 @@
 class CreateSpecializations < ActiveRecord::Migration[7.1]
   def change
-    create_table :specializations, id: false do |t|
-      t.integer :id, primary_key: true, null: false
+    create_table :specializations do |t|
       t.string :name
       t.string :role
       t.string :description

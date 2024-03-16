@@ -14,23 +14,23 @@
 #   )
 # end
 
-# Using API import PlayerClass Data
-require 'faraday'
-require 'faraday_middleware'
-require 'json'
+# # Using API import PlayerClass Data
+# require 'faraday'
+# require 'faraday_middleware'
+# require 'json'
 
-# Use access_token to set up Faraday connection
-def setup_api_client(access_token)
-  Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
-    faraday.response :json
-    faraday.adapter Faraday.default_adapter
-    faraday.params['access_token'] = access_token
-    faraday.params['namespace'] = 'static-10.2.5_52554-us'
-    faraday.params['locale'] = 'en_US'
-  end
-end
+# # Use access_token to set up Faraday connection
+# def setup_api_client(access_token)
+#   Faraday.new(url: 'https://us.api.blizzard.com') do |faraday|
+#     faraday.response :json
+#     faraday.adapter Faraday.default_adapter
+#     faraday.params['access_token'] = access_token
+#     faraday.params['namespace'] = 'static-10.2.5_52554-us'
+#     faraday.params['locale'] = 'en_US'
+#   end
+# end
 
-# Create a player_class data import function
+# # Create a player_class data import function
 # def import_classes(api_client)
 #   # Initiate a request to get all classes
 #   response = api_client.get('/data/wow/playable-class/index')
@@ -58,7 +58,7 @@ end
 #   end
 # end
 
-# Create a specialization data import function
+# # Create a specialization data import function
 # def import_specialization(api_client)
 #   # Initiate a request to get all specialization
 #   response = api_client.get('/data/wow/playable-specialization/index')
@@ -86,7 +86,7 @@ end
 #   end
 # end
 
-# Create a race_class date import function
+# # Create a race_class date import function
 # def import_race_classes(api_client)
 #   Race.find_each do |race|
 #     # Get detailed information for each race from the API
@@ -116,34 +116,34 @@ end
 #   end
 # end
 
-access_token = 'USEOhFEXogYznD3Oqp4uoD543PRIHKHVYd'
+# access_token = 'US7EqhDEEUvILQYwkY3DZmXNtmHiEzc4n9'
 
-api_client = setup_api_client(access_token)
-# # import_classes(api_client)
-# # import_specialization(api_client)
+# api_client = setup_api_client(access_token)
+# import_classes(api_client)
+# import_specialization(api_client)
 # import_race_classes(api_client)
 
-# Using Faker generate Hero data
-# require 'faker'
+# # Using Faker generate Hero data
+require 'faker'
 
-# 100.times do
-#   Hero.create(
-#     name: Faker::Games::WorldOfWarcraft.hero,
-#     race_id: Race.order('RANDOM()').first.id,
-#     player_class_id: PlayerClass.order('RANDOM()').first.id,
-#     quote: Faker::Games::WorldOfWarcraft.quote
-#   )
-# end
-
-# Using API insert media_url into PlayerClass
-PlayerClass.find_each do |player_class|
-  response = api_client.get("/data/wow/media/playable-class/#{player_class.id}")
-
-  if response.success?
-    media_detail = response.body
-    media_url = media_detail['assets'][0]['value'] if media_detail['assets'].present?
-    player_class.update(media_url: media_url) if media_url
-  else
-    puts "Failed to fetch media for class ID #{player_class.id}: #{response.status}"
-  end
+100.times do
+  Hero.create(
+    name: Faker::Games::WorldOfWarcraft.hero,
+    race_id: Race.order('RAND()').first.id,
+    player_class_id: PlayerClass.order('RAND()').first.id,
+    quote: Faker::Games::WorldOfWarcraft.quote
+  )
 end
+
+# # Using API insert media_url into PlayerClass
+# PlayerClass.find_each do |player_class|
+#   response = api_client.get("/data/wow/media/playable-class/#{player_class.id}")
+
+#   if response.success?
+#     media_detail = response.body
+#     media_url = media_detail['assets'][0]['value'] if media_detail['assets'].present?
+#     player_class.update(media_url: media_url) if media_url
+#   else
+#     puts "Failed to fetch media for class ID #{player_class.id}: #{response.status}"
+#   end
+# end
