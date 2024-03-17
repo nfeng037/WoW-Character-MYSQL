@@ -3,7 +3,7 @@ class CreateRaces < ActiveRecord::Migration[7.1]
     create_table :races, id: false do |t|
       t.bigint :id, primary_key: true, null: false
       t.string :name
-      t.string :description
+      t.text :description
       t.string :faction
       t.string :media_url
 

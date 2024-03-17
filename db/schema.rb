@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_12_231708) do
 
   create_table "races", force: :cascade do |t|
     t.string "name"
-    t.string "description"
+    t.text "description"
     t.string "faction"
     t.string "media_url"
     t.datetime "created_at", null: false
