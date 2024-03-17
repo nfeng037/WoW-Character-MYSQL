@@ -24,15 +24,13 @@
 #   <<: *default
 #   database: storage/production.sqlite3
 
-default: &default
+production:
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: wow_database
   username: nfeng
-  password: li881207
+  password: <%= ENV['PRODUCTION_DATABASE_PASSWORD'] %>
   host: localhost
 
-development:
-  <<: *default
-  database: wow_database
 
