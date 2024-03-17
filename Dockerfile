@@ -1,9 +1,12 @@
 # Use the official Ruby image from the Docker Hub
-FROM ruby:3.0.0
+FROM ruby:3.3.0
 
 # Install dependencies
 RUN apt-get update -qq && apt-get install -y nodejs npm default-mysql-client
 RUN npm install --global yarn
+
+# Install the specified Bundler version
+RUN gem install bundler:2.5.6
 
 # Set the working directory inside the container
 WORKDIR /myapp
