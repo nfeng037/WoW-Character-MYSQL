@@ -1,7 +1,7 @@
 # Using CSV Files import Race data
 require 'csv'
 
-csv_text = File.read("/Users/angelina/Documents/Agile/DataProject/race.csv")
+csv_text = File.read(Rails.root.join('race.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 
 csv.each do |race|
@@ -116,7 +116,7 @@ def import_race_classes(api_client)
   end
 end
 
-access_token = 'US7EqhDEEUvILQYwkY3DZmXNtmHiEzc4n9'
+access_token = 'USjqo86Jhqs7aK5bgiiQ7hjtE0vlYGagkq'
 
 api_client = setup_api_client(access_token)
 import_classes(api_client)
