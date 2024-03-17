@@ -2,7 +2,7 @@
 FROM ruby:3.0.0
 
 # Install dependencies
-RUN apt-get update -qq && apt-get install -y nodejs npm mysql-client
+RUN apt-get update -qq && apt-get install -y nodejs npm default-mysql-client
 RUN npm install --global yarn
 
 # Set the working directory inside the container
