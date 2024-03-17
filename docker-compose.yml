@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   db:
     image: mysql:5.7
@@ -19,4 +19,4 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: mysql2://myapp:password@db/myapp_development
+      DATABASE_URL: mysql2://nfeng:li881207@db/wow_database
