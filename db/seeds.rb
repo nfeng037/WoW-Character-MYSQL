@@ -116,7 +116,7 @@ def import_race_classes(api_client)
   end
 end
 
-access_token = 'USjqo86Jhqs7aK5bgiiQ7hjtE0vlYGagkq'
+access_token = 'US08OJUEMIZKYYOZ7GB5NGXP3OIVL0ZJ8E'
 
 api_client = setup_api_client(access_token)
 import_classes(api_client)
