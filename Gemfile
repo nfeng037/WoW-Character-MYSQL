@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem 'csv'
+
 ruby "3.3.0"
 
 gem "faraday", "1.10.3"
